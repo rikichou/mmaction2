@@ -187,6 +187,7 @@ class FatigueRawframeDataset(BaseDataset):
                 for fat_end_idx in fat_idxs:
                     video_info = {}
                     video_info['facerect_infos'] = rect_infos
+                    video_info['fat_idxs'] = fat_idxs
                     # idx for frame_dir
                     frame_dir = video_prefix
                     if self.data_prefix is not None:
