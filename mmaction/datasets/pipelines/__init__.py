@@ -27,7 +27,7 @@ __all__ = [
     'FormatShape', 'Compose', 'ToTensor', 'ToDataContainer',
     'GenerateLocalizationLabels', 'LoadLocalizationFeature', 'LoadProposals',
     'DecordInit', 'OpenCVInit', 'PyAVInit', 'SampleProposalFrames',
-    'UntrimmedSampleFrames', 'RawFrameDecode', 'DecordInit', 'OpenCVInit',
+    'UntrimmedSampleFrames', 'FatigueRawFrameDecode', 'RawFrameDecode', 'DecordInit', 'OpenCVInit',
     'PyAVInit', 'SampleProposalFrames', 'ColorJitter', 'LoadHVULabel',
     'SampleAVAFrames', 'AudioAmplify', 'MelSpectrogram', 'AudioDecode',
     'FormatAudioShape', 'LoadAudioFeature', 'AudioFeatureSelector',
