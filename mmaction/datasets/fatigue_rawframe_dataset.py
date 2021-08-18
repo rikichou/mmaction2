@@ -161,7 +161,7 @@ class FatigueRawframeDataset(BaseDataset):
 
                 # video_prefix, total_frame_num, label, fatigue indexes
                 tmp_split = line.strip().split(',')
-                line_split = tmp_split[:2]
+                line_split = tmp_split[:3]
                 fatigue_idxs_str = tmp_split[3]
 
                 video_prefix = line_split[0]
