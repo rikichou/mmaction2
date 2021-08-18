@@ -8,6 +8,7 @@ from .builder import DATASETS
 
 import numpy as np
 import os
+from pathlib import Path
 
 @DATASETS.register_module()
 class FatigueRawframeDataset(BaseDataset):
@@ -164,7 +165,7 @@ class FatigueRawframeDataset(BaseDataset):
                 line_split = tmp_split[:3]
                 fatigue_idxs_str = tmp_split[3]
 
-                video_prefix = line_split[0]
+                video_prefix = str(Path(line_split[0]))
                 total_num = int(line_split[1])  # have no use
                 fat_label = int(line_split[2])
                 video_path = os.path.join(self.data_prefix, video_prefix)
