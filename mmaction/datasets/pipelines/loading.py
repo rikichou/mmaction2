@@ -1329,7 +1329,7 @@ class FatigueRawFrameDecode:
                 debug_root_dir = '/media/ruiming/data/workspace/tmp/debug'
                 # if not os.path.exists(debug_root_dir):
                 #     os.makedirs(debug_root_dir)
-                idx_out_dir = os.path.join(debug_root_dir, directory.split('/')[-3:], str(frame_idx))
+                idx_out_dir = os.path.join(debug_root_dir, '/'.join(directory.split('/')[-3:]), str(frame_idx))
                 if not os.path.exists(idx_out_dir):
                     os.makedirs(idx_out_dir)
                 cv2.imwrite(os.path.join(idx_out_dir, filename_tmpl.format(frame_idx)), cur_face_frame)
