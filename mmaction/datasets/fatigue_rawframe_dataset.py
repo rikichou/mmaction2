@@ -165,10 +165,12 @@ class FatigueRawframeDataset(BaseDataset):
                 line_split = tmp_split[:3]
                 fatigue_idxs_str = tmp_split[3]
 
-                video_prefix = str(Path(line_split[0]))
+                video_prefix = line_split[0]
+                video_prefix = video_prefix.replace('\\', '/')
                 total_num = int(line_split[1])  # have no use
                 fat_label = int(line_split[2])
                 video_path = os.path.join(self.data_prefix, video_prefix)
+                #video_path = Path(self.data_prefix, video_prefix)
                 # get face_rectangle_infos
                 facerect_file_path = os.path.join(video_path, 'facerect.npy')
                 if not os.path.exists(facerect_file_path):
