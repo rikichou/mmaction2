@@ -118,22 +118,15 @@ class FatigueRawframeDataset(BaseDataset):
             power=power,
             dynamic_length=dynamic_length)
 
-    def get_valid_fatigue_idx(self, min_frames_before_fatigue, video_path, file_name, fatigue_idxs_str):
+    def get_valid_fatigue_idx(self, rect_infos, min_frames_before_fatigue, fatigue_idxs_str):
         global no_facerect_count
         global no_file_list
-
-        # check if numpy file is exist
-        file_path = os.path.join(video_path, file_name)
-        if not os.path.exists(file_path):
-            print("ERROR! {} not found in {}".format(file_name, video_path))
-            no_file_list.append(file_path)
-            return []
 
         # prepare fatigue index
         fatigue_idxs = [int(x) for x in fatigue_idxs_str.strip().split(',')]
 
         # prepare face rectangle idx map info
-        rect_infos = np.load(file_path, allow_pickle=True).item()
+
         idx_rect_map = np.zeros(len(rect_infos), np.bool)
         for info in rect_infos:
             idx = int(info.split('.')[0].split('_')[1]) - 1
@@ -175,7 +168,14 @@ class FatigueRawframeDataset(BaseDataset):
                 total_num = int(line_split[1])  # have no use
                 fat_label = int(line_split[2])
                 video_path = os.path.join(self.data_prefix, video_prefix)
-                fat_idxs = self.get_valid_fatigue_idx(self.min_frames_before_fatigue, video_path, 'facerect.npy', fatigue_idxs_str)
+                # get face_rectangle_infos
+                facerect_file_path = os.path.join(video_path, 'facerect.npy')
+                if not os.path.exists(facerect_file_path):
+                    invalid_video_count += 1
+                    print("Can not found ", facerect_file_path)
+                    continue
+                rect_infos = np.load(facerect_file_path, allow_pickle=True).item()
+                fat_idxs = self.get_valid_fatigue_idx(rect_infos, self.min_frames_before_fatigue, fatigue_idxs_str)
                 if len(fat_idxs)<1:
                     invalid_video_count += 1
                     continue
@@ -183,6 +183,7 @@ class FatigueRawframeDataset(BaseDataset):
                 # get each fatigue to video info
                 for fat_end_idx in fat_idxs:
                     video_info = {}
+                    video_info['facerect_infos'] = rect_infos
                     # idx for frame_dir
                     frame_dir = video_prefix
                     if self.data_prefix is not None:

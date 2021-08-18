@@ -1276,10 +1276,31 @@ class FatigueRawFrameDecode:
 
         offset = results.get('offset', 0)
 
-        # get face rectangle
+        # loading face
+        def get_input_face(image, rect):
+            sx, sy, ex, ey = rect
+            h, w, c = image.shape
+            faceh = ey - sy
+            facew = ex - sx
 
+            longsize = max(faceh, facew)
+            expendw = longsize - facew
+            expendh = longsize - faceh
+
+            sx = sx - (expendw / 2)
+            ex = ex + (expendw / 2)
+            sy = sy - (expendh / 2)
+            ey = ey + (expendh / 2)
+
+            sx = int(max(0, sx))
+            sy = int(max(0, sy))
+            ex = int(min(w - 1, ex))
+            ey = int(min(h - 1, ey))
+
+            return image[sy:ey, sx:ex, :]
 
         cache = {}
+        facerect_infos = results['facerect_infos']
         for i, frame_idx in enumerate(results['frame_inds']):
             # Avoid loading duplicated frames
             if frame_idx in cache:
@@ -1298,7 +1319,8 @@ class FatigueRawFrameDecode:
                 img_bytes = self.file_client.get(filepath)
                 # Get frame with channel order RGB directly.
                 cur_frame = mmcv.imfrombytes(img_bytes, channel_order='rgb')
-                imgs.append(cur_frame)
+                cur_face_frame = get_input_face(cur_frame, facerect_infos[filename_tmpl.format(frame_idx)])
+                imgs.append(cur_face_frame)
             elif modality == 'Flow':
                 x_filepath = osp.join(directory,
                                       filename_tmpl.format('x', frame_idx))
