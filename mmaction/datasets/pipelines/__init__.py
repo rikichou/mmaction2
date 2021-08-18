@@ -13,7 +13,7 @@ from .loading import (AudioDecode, AudioDecodeInit, AudioFeatureSelector,
                       ImageDecode, LoadAudioFeature, LoadHVULabel,
                       LoadLocalizationFeature, LoadProposals, OpenCVDecode,
                       OpenCVInit, PIMSDecode, PIMSInit, PyAVDecode,
-                      PyAVDecodeMotionVector, PyAVInit, RawFrameDecode,
+                      PyAVDecodeMotionVector, PyAVInit, FatigueRawFrameDecode, RawFrameDecode,
                       SampleAVAFrames, SampleFrames, SampleProposalFrames,
                       UntrimmedSampleFrames)
 from .pose_loading import (GeneratePoseTarget, LoadKineticsPose, PoseDecode,
