@@ -1232,7 +1232,7 @@ class OpenCVDecode:
 
         return results
 
-
+import cv2
 @PIPELINES.register_module()
 class FatigueRawFrameDecode:
     """Load and decode frames with given indices.
@@ -1303,7 +1303,7 @@ class FatigueRawFrameDecode:
         facerect_infos = results['facerect_infos']
 
         # debug
-        print("{} : {}".format(directory, results['frame_inds']))
+        #print("{} : {}".format(directory, results['frame_inds']))
         for i, frame_idx in enumerate(results['frame_inds']):
             # Avoid loading duplicated frames
             if frame_idx in cache:
@@ -1324,6 +1324,14 @@ class FatigueRawFrameDecode:
                 cur_frame = mmcv.imfrombytes(img_bytes, channel_order='rgb')
                 cur_face_frame = get_input_face(cur_frame, facerect_infos[filename_tmpl.format(frame_idx)])
                 imgs.append(cur_face_frame)
+
+                # debug image
+                debug_root_dir = '/media/ruiming/data/workspace/tmp/debug'
+                if not os.path.exists(debug_root_dir):
+                    os.makedirs(debug_root_dir)
+                debug_out_dir = os.path.join(debug_root_dir, directory.split('/')[-3:], str(frame_idx))
+                cv2.imwrite(os.path.join(debug_root_dir, filename_tmpl.format(frame_idx)), cur_face_frame)
+
             elif modality == 'Flow':
                 x_filepath = osp.join(directory,
                                       filename_tmpl.format('x', frame_idx))
