@@ -204,7 +204,8 @@ class FatigueRawframeDataset(BaseDataset):
                         video_info['label'] = label[0]
                     video_infos.append(video_info)
 
-        print("End parsing label file, Total {} videos, and {} invalid {} videos under min_frames_before_fatigue {}".format(total_video_count, invalid_video_count, self.min_frames_before_fatigue))
+        print("End parsing label file, Total {} videos, and {} invalid videos under min_frames_before_fatigue {}".format(
+            total_video_count, invalid_video_count, self.min_frames_before_fatigue))
 
         return video_infos
 
