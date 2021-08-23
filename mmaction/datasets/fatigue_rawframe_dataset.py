@@ -8,6 +8,7 @@ from .builder import DATASETS
 
 import numpy as np
 import os
+import random
 from pathlib import Path
 
 @DATASETS.register_module()
@@ -154,11 +155,25 @@ class FatigueRawframeDataset(BaseDataset):
         video_infos = []
         print("Start to Parsing label file ", self.ann_file)
 
-        total_video_count = 0
-        invalid_video_count = 0
+        # statistics info
+        statistics_info = {}
+        statistics_info['total'] = 0
+        statistics_info['invalid'] = 0
+
+        statistics_info[0] = {}
+        statistics_info[1] = {}
+        statistics_info[0]['num'] = 0
+        statistics_info[0]['invalid'] = 0
+        statistics_info[0]['clips'] = 0
+        statistics_info[1]['num'] = 0
+        statistics_info[1]['invalid'] = 0
+        statistics_info[1]['clips'] = 0
+
         with open(self.ann_file, 'r') as fin:
             for line in fin:
-                total_video_count += 1
+                # statistics
+                statistics_info['total'] += 1
+                statistics_info[fat_label]['num'] += 1
 
                 # video_prefix, total_frame_num, label, fatigue indexes
                 tmp_split = line.strip().split(',')
@@ -174,16 +189,19 @@ class FatigueRawframeDataset(BaseDataset):
                 # get face_rectangle_infos
                 facerect_file_path = os.path.join(video_path, 'facerect.npy')
                 if not os.path.exists(facerect_file_path):
-                    invalid_video_count += 1
-                    print("Can not found ", facerect_file_path)
+                    statistics_info['invalid'] += 1
+                    statistics_info[fat_label]['invalid'] += 1
+                    print("!! Can not found ", facerect_file_path)
                     continue
                 rect_infos = np.load(facerect_file_path, allow_pickle=True).item()
                 fat_idxs = self.get_valid_fatigue_idx(rect_infos, self.min_frames_before_fatigue, fatigue_idxs_str)
                 if len(fat_idxs)<1:
-                    invalid_video_count += 1
+                    statistics_info['invalid'] += 1
+                    statistics_info[fat_label]['invalid'] += 1
                     continue
 
                 # get each fatigue to video info
+                infos = []
                 for fat_end_idx in fat_idxs:
                     video_info = {}
                     video_info['facerect_infos'] = rect_infos
@@ -206,16 +224,22 @@ class FatigueRawframeDataset(BaseDataset):
                     else:
                         assert len(label) == 1
                         video_info['label'] = label[0]
-                    video_infos.append(video_info)
+                    infos.append(video_info)
+                video_infos.append(infos)
+                # statistics
+                statistics_info[fat_label]['clips'] += len(fat_idxs)
 
-        print("!!!!! End parsing label file, Total {} videos and get {} samples, and {} invalid videos under min_frames_before_fatigue {}".format(
-            total_video_count, len(video_infos), invalid_video_count, self.min_frames_before_fatigue))
+        print("Total {}\nInvalid {}\n\nFatigue_close {}\nInvalid {}\nValid {}\nClips {}, Clips_per_Video {}\n\nFatigue_look_down {}\nInvalid {}\nValid {}\nClips {}, Clips_per_Video {}".format(
+            statistics_info['total'], statistics_info['invalid'],
+            statistics_info[1]['num'], statistics_info[1]['invalid'], statistics_info[1]['num']-statistics_info[1]['invalid'], statistics_info[1]['clips'], statistics_info[1]['clips']/(statistics_info[1]['num']-statistics_info[1]['invalid']),
+            statistics_info[0]['num'], statistics_info[0]['invalid'], statistics_info[0]['num'] - statistics_info[0]['invalid'], statistics_info[0]['clips'], statistics_info[0]['clips']/(statistics_info[0]['num']-statistics_info[0]['invalid']),
+        ))
 
         return video_infos
 
     def prepare_train_frames(self, idx):
         """Prepare the frames for training given the index."""
-        results = copy.deepcopy(self.video_infos[idx])
+        results = copy.deepcopy(random.choice(self.video_infos[idx]))
         results['filename_tmpl'] = self.filename_tmpl
         results['modality'] = self.modality
         #results['start_index'] = self.start_index
@@ -230,7 +254,7 @@ class FatigueRawframeDataset(BaseDataset):
 
     def prepare_test_frames(self, idx):
         """Prepare the frames for testing given the index."""
-        results = copy.deepcopy(self.video_infos[idx])
+        results = copy.deepcopy(self.video_infos[idx][0])
         results['filename_tmpl'] = self.filename_tmpl
         results['modality'] = self.modality
         #results['start_index'] = self.start_index
