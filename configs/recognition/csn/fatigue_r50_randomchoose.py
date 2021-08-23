@@ -109,5 +109,5 @@ lr_config = dict(
     warmup_iters=16)
 total_epochs = 58
 
-work_dir = './work_dirs/ircsn_ig65m_pretrained_bnfrozen_r50_32x2x1_58e_fatiguesub_rgb'  # noqa: E501
+work_dir = './work_dirs/fatigue_r50_randomchoose'  # noqa: E501
 find_unused_parameters = True

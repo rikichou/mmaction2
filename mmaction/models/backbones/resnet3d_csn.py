@@ -124,6 +124,7 @@ class ResNet3dCSN(ResNet3d):
         self.arch_settings = {
             # 18: (BasicBlock3d, (2, 2, 2, 2)),
             # 34: (BasicBlock3d, (3, 4, 6, 3)),
+            18: (CSNBottleneck3d, (2, 2, 2, 2)),
             50: (CSNBottleneck3d, (3, 4, 6, 3)),
             101: (CSNBottleneck3d, (3, 4, 23, 3)),
             152: (CSNBottleneck3d, (3, 8, 36, 3))
