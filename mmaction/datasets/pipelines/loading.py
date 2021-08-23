@@ -1327,7 +1327,7 @@ class FatigueRawFrameDecode:
                 imgs.append(cur_face_frame)
 
                 # debug image
-                debug_root_dir = '/media/ruiming/data/workspace/tmp/debug'
+                debug_root_dir = '/zhourui/workspace/pro/tmp/train_debug'
                 # if not os.path.exists(debug_root_dir):
                 #     os.makedirs(debug_root_dir)
                 idx_out_dir = os.path.join(debug_root_dir, '/'.join(directory.split('/')[-3:]), out_dir_name)
