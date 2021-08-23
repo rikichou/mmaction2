@@ -171,10 +171,6 @@ class FatigueRawframeDataset(BaseDataset):
 
         with open(self.ann_file, 'r') as fin:
             for line in fin:
-                # statistics
-                statistics_info['total'] += 1
-                statistics_info[fat_label]['num'] += 1
-
                 # video_prefix, total_frame_num, label, fatigue indexes
                 tmp_split = line.strip().split(',')
                 line_split = tmp_split[:3]
@@ -185,6 +181,11 @@ class FatigueRawframeDataset(BaseDataset):
                 total_num = int(line_split[1])  # have no use
                 fat_label = int(line_split[2])
                 video_path = os.path.join(self.data_prefix, video_prefix)
+
+                # statistics
+                statistics_info['total'] += 1
+                statistics_info[fat_label]['num'] += 1
+
                 #video_path = Path(self.data_prefix, video_prefix)
                 # get face_rectangle_infos
                 facerect_file_path = os.path.join(video_path, 'facerect.npy')
