@@ -25,7 +25,7 @@ ann_file_val = 'data/fatigue/valid/streamax_val_list_rawframes.txt'
 ann_file_test = 'data/fatigue/valid/streamax_val_list_rawframes.txt'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_bgr=False)
-clip_len = 16
+clip_len = 48
 train_pipeline = [
     dict(type='SampleFrames', clip_len=clip_len, frame_interval=1, num_clips=1, out_of_bound_opt='repeat_last'),
     dict(type='FatigueRawFrameDecode'),
