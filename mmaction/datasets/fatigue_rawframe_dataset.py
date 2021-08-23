@@ -235,8 +235,8 @@ class FatigueRawframeDataset(BaseDataset):
 
         print("Total {}\nInvalid {}\n\nFatigue_close {}\nInvalid {}\nValid {}\nClips {}, Clips_per_Video {}\n\nFatigue_look_down {}\nInvalid {}\nValid {}\nClips {}, Clips_per_Video {}".format(
             statistics_info['total'], statistics_info['invalid'],
-            statistics_info[1]['num'], statistics_info[1]['invalid'], statistics_info[1]['num']-statistics_info[1]['invalid'], statistics_info[1]['clips'], statistics_info[1]['clips']/(statistics_info[1]['num']-statistics_info[1]['invalid']),
-            statistics_info[0]['num'], statistics_info[0]['invalid'], statistics_info[0]['num'] - statistics_info[0]['invalid'], statistics_info[0]['clips'], statistics_info[0]['clips']/(statistics_info[0]['num']-statistics_info[0]['invalid']),
+            statistics_info[1]['num'], statistics_info[1]['invalid'], statistics_info[1]['num']-statistics_info[1]['invalid'], statistics_info[1]['clips'], statistics_info[1]['clips']/max(1, statistics_info[1]['num']-statistics_info[1]['invalid']),
+            statistics_info[0]['num'], statistics_info[0]['invalid'], statistics_info[0]['num'] - statistics_info[0]['invalid'], statistics_info[0]['clips'], statistics_info[0]['clips']/max(1, statistics_info[0]['num']-statistics_info[0]['invalid']),
         ))
 
         return video_infos
