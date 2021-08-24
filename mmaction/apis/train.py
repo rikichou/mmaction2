@@ -47,6 +47,7 @@ def train_model(model,
     dataloader_setting = dict(
         videos_per_gpu=cfg.data.get('videos_per_gpu', 1),
         workers_per_gpu=cfg.data.get('workers_per_gpu', 1),
+        pin_memory=cfg.data.get('pin_memory', False),
         num_gpus=len(cfg.gpu_ids),
         dist=distributed,
         seed=cfg.seed)
