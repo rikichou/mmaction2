@@ -178,7 +178,7 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         metrics = metrics if isinstance(metrics, (list, tuple)) else [metrics]
         allowed_metrics = [
             'top_k_accuracy', 'mean_class_accuracy', 'mean_average_precision',
-            'mmit_mean_average_precision','top_k_accuracy'
+            'mmit_mean_average_precision','top_k_classes'
         ]
 
         for metric in metrics:
@@ -187,6 +187,16 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
 
         eval_results = OrderedDict()
         gt_labels = [ann[0]['label'] for ann in self.video_infos]
+
+        # save video infos and results
+        if True:
+            save_labels = np.array(gt_labels)
+            save_results = np.array(results)
+
+            np.save('/zhourui/workspace/pro/source/mmaction2/work_dirs/fatigue_r50_randomchoose/valid_labels.npy',
+                    save_labels)
+            np.save('/zhourui/workspace/pro/source/mmaction2/work_dirs/fatigue_r50_randomchoose/valid_results.npy',
+                    save_results)
 
         for metric in metrics:
             msg = f'Evaluating {metric} ...'
