@@ -193,7 +193,10 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
                 raise KeyError(f'metric {metric} is not supported')
 
         eval_results = OrderedDict()
-        gt_labels = [ann[0]['label'] for ann in self.video_infos]
+        if self.test_all:
+            gt_labels = [ann['label'] for ann in self.video_infos]
+        else:
+            gt_labels = [ann[0]['label'] for ann in self.video_infos]
 
         # save video infos and results
         if self.test_save_results_path:
