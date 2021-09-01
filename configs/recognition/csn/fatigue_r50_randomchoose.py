@@ -23,6 +23,9 @@ data_root_val = 'data/fatigue/valid'
 ann_file_train = 'data/fatigue/train/streamax_train_list_rawframes.txt'
 ann_file_val = 'data/fatigue/valid/streamax_val_list_rawframes.txt'
 ann_file_test = 'data/fatigue/valid/streamax_val_list_rawframes.txt'
+test_save_results_path = 'work_dirs/fatigue_r50_randomchoose/valid_results_testone.npy'
+test_save_label_path = 'work_dirs/fatigue_r50_randomchoose/valid_label_testone.npy'
+
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_bgr=False)
 clip_len = 48
@@ -91,7 +94,11 @@ data = dict(
         ann_file=ann_file_val,
         data_prefix=data_root_val,
         pipeline=test_pipeline,
-        min_frames_before_fatigue=clip_len))
+        min_frames_before_fatigue=clip_len,
+        test_all=False,
+        test_save_results_path=test_save_results_path,
+        test_save_label_path=test_save_label_path
+        ))
 evaluation = dict(
     interval=5, metrics=['top_k_accuracy', 'mean_class_accuracy'])
 

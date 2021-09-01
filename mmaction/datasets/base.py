@@ -61,6 +61,8 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
                  data_prefix=None,
                  test_mode=False,
                  test_all=False,
+                 test_save_label_path=None,
+                 test_save_results_path=None,
                  multi_class=False,
                  num_classes=None,
                  start_index=1,
@@ -76,6 +78,8 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
                 data_prefix) else data_prefix
         self.test_mode = test_mode
         self.test_all = test_all
+        self.test_save_label_path = test_save_label_path
+        self.test_save_results_path = test_save_results_path
         self.multi_class = multi_class
         self.num_classes = num_classes
         self.start_index = start_index
@@ -192,14 +196,11 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         gt_labels = [ann[0]['label'] for ann in self.video_infos]
 
         # save video infos and results
-        if True:
-            save_labels = np.array(gt_labels)
+        if self.test_save_results_path:
             save_results = np.array(results)
-
-            np.save('/zhourui/workspace/pro/source/mmaction2/work_dirs/fatigue_r50_randomchoose/valid_labels.npy',
-                    save_labels)
-            np.save('/zhourui/workspace/pro/source/mmaction2/work_dirs/fatigue_r50_randomchoose/valid_results.npy',
-                    save_results)
+            np.save(self.test_save_results_path, save_results)
+        if self.test_save_label_path:
+            np.save(self.test_save_label_path, self.video_infos)
 
         for metric in metrics:
             msg = f'Evaluating {metric} ...'
