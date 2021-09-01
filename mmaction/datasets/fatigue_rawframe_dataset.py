@@ -94,6 +94,7 @@ class FatigueRawframeDataset(BaseDataset):
                  pipeline,
                  data_prefix=None,
                  test_mode=False,
+                 test_all=False,
                  filename_tmpl='img_{:05}.jpg',
                  with_offset=False,
                  multi_class=False,
@@ -112,6 +113,7 @@ class FatigueRawframeDataset(BaseDataset):
             pipeline,
             data_prefix,
             test_mode,
+            test_all,
             multi_class,
             num_classes,
             start_index,
@@ -153,6 +155,7 @@ class FatigueRawframeDataset(BaseDataset):
         if self.ann_file.endswith('.json'):
             return self.load_json_annotations()
         video_infos = []
+        flatten_video_infos = []
         print("Start to Parsing label file ", self.ann_file)
 
         # statistics info
@@ -227,16 +230,18 @@ class FatigueRawframeDataset(BaseDataset):
                         video_info['label'] = label[0]
                     infos.append(video_info)
                 video_infos.append(infos)
+                flatten_video_infos.extend(infos)
                 # statistics
                 statistics_info[fat_label]['clips'] += len(fat_idxs)
 
-        print("Total {}\nInvalid {}\n\nFatigue_close {}\nInvalid {}\nValid {}\nClips {}, Clips_per_Video {}\n\nFatigue_look_down {}\nInvalid {}\nValid {}\nClips {}, Clips_per_Video {}".format(
+        print("Total {}\nInvalid {}\n\nFatigue_close {}\nInvalid {}\nValid {}\nClips {}, Clips_per_Video {}\n\nFatigue_look_down {}\nInvalid {}\nValid {}\nClips {}, Clips_per_Video {}\nflatten_video_infos {}".format(
             statistics_info['total'], statistics_info['invalid'],
             statistics_info[1]['num'], statistics_info[1]['invalid'], statistics_info[1]['num']-statistics_info[1]['invalid'], statistics_info[1]['clips'], statistics_info[1]['clips']/max(1, statistics_info[1]['num']-statistics_info[1]['invalid']),
             statistics_info[0]['num'], statistics_info[0]['invalid'], statistics_info[0]['num'] - statistics_info[0]['invalid'], statistics_info[0]['clips'], statistics_info[0]['clips']/max(1, statistics_info[0]['num']-statistics_info[0]['invalid']),
+            len(flatten_video_infos)
         ))
 
-        return video_infos
+        return video_infos,flatten_video_infos
 
     def prepare_train_frames(self, idx):
         """Prepare the frames for training given the index."""
@@ -255,7 +260,10 @@ class FatigueRawframeDataset(BaseDataset):
 
     def prepare_test_frames(self, idx):
         """Prepare the frames for testing given the index."""
-        results = copy.deepcopy(self.video_infos[idx][0])
+        if self.test_all:
+            results = copy.deepcopy(self.video_infos[idx])
+        else:
+            results = copy.deepcopy(self.video_infos[idx][0])
         results['filename_tmpl'] = self.filename_tmpl
         results['modality'] = self.modality
         #results['start_index'] = self.start_index

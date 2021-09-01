@@ -60,6 +60,7 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
                  pipeline,
                  data_prefix=None,
                  test_mode=False,
+                 test_all=False,
                  multi_class=False,
                  num_classes=None,
                  start_index=1,
@@ -74,6 +75,7 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
             data_prefix) if data_prefix is not None and osp.isdir(
                 data_prefix) else data_prefix
         self.test_mode = test_mode
+        self.test_all = test_all
         self.multi_class = multi_class
         self.num_classes = num_classes
         self.start_index = start_index
@@ -85,7 +87,8 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
         assert not (self.multi_class and self.sample_by_class)
 
         self.pipeline = Compose(pipeline)
-        self.video_infos = self.load_annotations()
+        video_infos, flatten_video_infos = self.load_annotations()
+        self.video_infos = flatten_video_infos if self.test_mode and self.test_all else video_infos
         if self.sample_by_class:
             self.video_infos_by_class = self.parse_by_class()
 
@@ -206,15 +209,19 @@ class BaseDataset(Dataset, metaclass=ABCMeta):
 
             if metric == 'top_k_classes':
                 top_cls_acc = top_k_classes(results, gt_labels, k=2, mode='accurate')
-                eval_results['top_cls_acc'] = top_cls_acc
-                log_msg = f'\ntop_2_classes\t{top_cls_acc}'
+
+                log_msg = []
+                for k, acc in top_cls_acc:
+                    eval_results[f'class_{k}_acc'] = acc
+                    log_msg.append(f'\nclass_{k}_acc\t{acc:.4f}')
+                log_msg = ''.join(log_msg)
                 print_log(log_msg, logger=logger)
                 continue
 
             if metric == 'top_k_accuracy':
                 topk = metric_options.setdefault('top_k_accuracy',
                                                  {}).setdefault(
-                                                     'topk', (1, 5))
+                                                     'topk', (1,))
                 if not isinstance(topk, (int, tuple)):
                     raise TypeError('topk must be int or tuple of int, '
                                     f'but got {type(topk)}')
