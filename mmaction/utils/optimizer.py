@@ -1,8 +1,8 @@
 from mmcv.runner import OptimizerHook, HOOKS
-try:
-    import apex
-except:
-    print('apex is not installed')
+# try:
+#     import apex
+# except:
+#     print('apex is not installed')
 
 
 @HOOKS.register_module()
