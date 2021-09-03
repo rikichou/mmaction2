@@ -364,6 +364,7 @@ class FatigueCleanDataset(BaseDataset):
                  pipeline,
                  video_data_prefix,
                  facerect_data_prefix,
+                 data_phase='train',
                  test_mode=False,
                  test_all=False,
                  test_save_label_path=None,
@@ -383,6 +384,7 @@ class FatigueCleanDataset(BaseDataset):
         self.min_frames_before_fatigue = min_frames_before_fatigue
         self.video_data_prefix = video_data_prefix
         self.facerect_data_prefix = facerect_data_prefix
+        self.data_phase = data_phase
         super().__init__(
             ann_file,
             pipeline,
@@ -456,6 +458,10 @@ class FatigueCleanDataset(BaseDataset):
 
             for vname in anns:
                 vinfo = anns[vname]
+
+                # check if train or valid
+                if self.data_phase != vinfo['license_plate_type']:
+                    continue
 
                 # video path
                 video_path = os.path.join(self.video_data_prefix, vname)
