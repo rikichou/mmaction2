@@ -406,7 +406,7 @@ class FatigueCleanDataset(BaseDataset):
         global no_file_list
 
         # prepare face rectangle idx map info
-        idx_rect_map = np.zeros(max_frames, np.bool)
+        idx_rect_map = np.zeros(max_frames+1, np.bool)
         for info in rect_infos:
             # just ignore index 0, both images and fatigue index are start with index 1
             idx = int(info.split('.')[0].split('_')[1])
@@ -466,6 +466,9 @@ class FatigueCleanDataset(BaseDataset):
                 # video path
                 video_path = os.path.join(self.video_data_prefix, vname)
 
+                # total frames
+                total_frames = vinfo['frames_avi']
+
                 # video label
                 fat_label = label_map[vinfo['label']]
 
@@ -486,7 +489,7 @@ class FatigueCleanDataset(BaseDataset):
                 rect_infos = self.get_facerects(facerect_path)
 
                 # get valid fatigue index according to facerect infos and fatigue index
-                fat_idxs = self.get_valid_fatigue_idx(rect_infos, self.min_frames_before_fatigue, fatigue_idxs)
+                fat_idxs = self.get_valid_fatigue_idx(rect_infos, self.min_frames_before_fatigue, fatigue_idxs, max_frames=total_frames)
                 if len(fat_idxs) < 1:
                     statistics_info['invalid'] += 1
                     statistics_info[fat_label]['invalid'] += 1
