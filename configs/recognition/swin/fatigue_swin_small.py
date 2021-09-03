@@ -3,7 +3,7 @@ _base_ = [
 ]
 
 pretrained_path='pretrained/swin_small_patch244_window877_kinetics400_1k.pth'
-model=dict(backbone=dict(patch_size=(2,4,4), drop_path_rate=0.1, pretrained2d=True, pretrained=pretrained_path),cls_head=dict(num_classes=2),test_cfg=dict(max_testing_views=4))
+model=dict(backbone=dict(patch_size=(2,4,4), drop_path_rate=0.1, pretrained2d=False, pretrained=pretrained_path),cls_head=dict(num_classes=2),test_cfg=dict(max_testing_views=4))
 
 # dataset settings
 dataset_type = 'FatigueCleanDataset'
