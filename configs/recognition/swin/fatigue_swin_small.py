@@ -66,6 +66,7 @@ test_pipeline = [
 data = dict(
     videos_per_gpu=8,
     workers_per_gpu=4,
+    pin_memory=False,
     val_dataloader=dict(
         videos_per_gpu=1,
         workers_per_gpu=1
@@ -136,5 +137,5 @@ optimizer_config = dict(
     grad_clip=None,
     coalesce=True,
     bucket_size_mb=-1,
-    use_fp16=True,
+    use_fp16=False,
 )
