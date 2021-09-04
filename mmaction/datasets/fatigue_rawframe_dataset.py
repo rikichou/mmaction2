@@ -148,8 +148,8 @@ class FatigueRawframeDataset(BaseDataset):
         for fat_end_idx in fatigue_idxs:
             fat_end_idx -= 1
 
-            # just for test, remember to del !!!!
-            fat_end_idx += 10
+            # # just for test, remember to del !!!!
+            # fat_end_idx += 10
 
             fat_start_idx = max(fat_end_idx - min_frames_before_fatigue + 1, 0)
 
