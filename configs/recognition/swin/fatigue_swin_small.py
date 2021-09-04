@@ -7,12 +7,12 @@ model=dict(backbone=dict(patch_size=(2,4,4), drop_path_rate=0.1, pretrained2d=Fa
 
 # dataset settings
 dataset_type = 'FatigueCleanDataset'
-data_root = 'data/fatigue/clean/fatigue_clips'
-data_root_val = 'data/fatigue/clean/fatigue_clips'
-facerect_data_prefix = 'data/fatigue/clean/fatigue_info_from_yolov5'
-ann_file_train = 'data/fatigue/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
-ann_file_val = 'data/fatigue/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
-ann_file_test = 'data/fatigue/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
+data_root = '/zhourui/workspace/pro/source/mmaction2/data/fatigue/clean/fatigue_clips'
+data_root_val = '/zhourui/workspace/pro/source/mmaction2/data/fatigue/clean/fatigue_clips'
+facerect_data_prefix = '/zhourui/workspace/pro/source/mmaction2/data/fatigue/clean/fatigue_info_from_yolov5'
+ann_file_train = '/zhourui/workspace/pro/source/mmaction2/data/fatigue/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
+ann_file_val = '/zhourui/workspace/pro/source/mmaction2/data/fatigue/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
+ann_file_test = '/zhourui/workspace/pro/source/mmaction2/data/fatigue/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_bgr=False)
 
@@ -125,7 +125,7 @@ total_epochs = 30
 
 # runtime settings
 checkpoint_config = dict(interval=1)
-work_dir = './work_dirs/fatigue_swin_small.py'
+work_dir = '/zhourui/workspace/pro/source/mmaction2/work_dirs/fatigue_swin_small.py'
 find_unused_parameters = False
 
 
