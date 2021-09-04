@@ -405,7 +405,7 @@ class FatigueCleanDataset(BaseDataset):
             power=power,
             dynamic_length=dynamic_length)
 
-    def get_valid_fatigue_idx(self, rect_infos, min_frames_before_fatigue, fatigue_idxs, max_frames=500):
+    def get_valid_fatigue_idx(self, rect_infos, min_frames_before_fatigue, fatigue_idxs, video_dir, max_frames=500):
         global no_facerect_count
         global no_file_list
 
@@ -414,7 +414,7 @@ class FatigueCleanDataset(BaseDataset):
         for info in rect_infos:
             # just ignore index 0, both images and fatigue index are start with index 1
             idx = int(info.split('.')[0].split('_')[1])
-            if not rect_infos[info] is None:
+            if not rect_infos[info] is None and os.path.exists(os.path.join(video_dir, info)):
                 idx_rect_map[idx] = True
 
         # index check
