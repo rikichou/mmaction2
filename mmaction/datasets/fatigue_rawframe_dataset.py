@@ -493,7 +493,7 @@ class FatigueCleanDataset(BaseDataset):
                 rect_infos = self.get_facerects(facerect_path)
 
                 # get valid fatigue index according to facerect infos and fatigue index
-                fat_idxs = self.get_valid_fatigue_idx(rect_infos, self.min_frames_before_fatigue, fatigue_idxs, max_frames=total_frames)
+                fat_idxs = self.get_valid_fatigue_idx(rect_infos, self.min_frames_before_fatigue, fatigue_idxs, video_path, max_frames=total_frames)
                 if len(fat_idxs) < 1:
                     statistics_info['invalid'] += 1
                     statistics_info[fat_label]['invalid'] += 1
