@@ -1303,7 +1303,7 @@ class FatigueRawFrameDecode:
         facerect_infos = results['facerect_infos']
 
         # debug image
-        out_dir_name = str(results['frame_inds'][-1])+'_'+str(results['label'])
+        # out_dir_name = str(results['frame_inds'][-1])+'_'+str(results['label'])
         for i, frame_idx in enumerate(results['frame_inds']):
             # Avoid loading duplicated frames
             if frame_idx in cache:
@@ -1326,13 +1326,13 @@ class FatigueRawFrameDecode:
                 imgs.append(cur_face_frame)
 
                 # debug image
-                debug_root_dir = '/zhourui/workspace/pro/tmp/clean_debug'
-                if not os.path.exists(debug_root_dir):
-                    os.makedirs(debug_root_dir)
-                idx_out_dir = os.path.join(debug_root_dir, '/'.join(directory.split('/')[-3:]), out_dir_name)
-                if not os.path.exists(idx_out_dir):
-                    os.makedirs(idx_out_dir)
-                cv2.imwrite(os.path.join(idx_out_dir, filename_tmpl.format(frame_idx)), cur_face_frame)
+                # debug_root_dir = '/zhourui/workspace/pro/tmp/clean_debug'
+                # if not os.path.exists(debug_root_dir):
+                #     os.makedirs(debug_root_dir)
+                # idx_out_dir = os.path.join(debug_root_dir, '/'.join(directory.split('/')[-3:]), out_dir_name)
+                # if not os.path.exists(idx_out_dir):
+                #     os.makedirs(idx_out_dir)
+                # cv2.imwrite(os.path.join(idx_out_dir, filename_tmpl.format(frame_idx)), cur_face_frame)
 
             elif modality == 'Flow':
                 x_filepath = osp.join(directory,
