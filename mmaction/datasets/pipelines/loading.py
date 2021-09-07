@@ -1330,8 +1330,8 @@ class FatigueRawFrameDecode:
                 if not os.path.exists(debug_root_dir):
                     os.makedirs(debug_root_dir)
                 idx_out_dir = os.path.join(debug_root_dir, '/'.join(directory.split('/')[-3:]), out_dir_name)
-                if not os.path.exists(idx_out_dir):
-                    os.makedirs(idx_out_dir)
+                # if not os.path.exists(idx_out_dir):
+                #     os.makedirs(idx_out_dir)
                 cv2.imwrite(os.path.join(idx_out_dir, filename_tmpl.format(frame_idx)), cur_face_frame)
 
             elif modality == 'Flow':
