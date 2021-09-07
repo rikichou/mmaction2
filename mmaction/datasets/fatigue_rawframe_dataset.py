@@ -520,8 +520,8 @@ class FatigueCleanDataset(BaseDataset):
                 statistics_info[fat_label]['clips'] += len(fat_idxs)
 
                 # debug
-                if len(video_infos)==50:
-                    break
+                # if len(video_infos)==50:
+                #     break
 
         print(
             "Total {}\nInvalid {}\n\nFatigue_close {}\nInvalid {}\nValid {}\nClips {}, Clips_per_Video {}\n\nFatigue_look_down {}\nInvalid {}\nValid {}\nClips {}, Clips_per_Video {}\nflatten_video_infos {}".format(
