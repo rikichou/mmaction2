@@ -1303,7 +1303,7 @@ class FatigueRawFrameDecode:
         facerect_infos = results['facerect_infos']
 
         # debug image
-        out_dir_name = str(results['frame_inds'][-1])
+        out_dir_name = str(results['frame_inds'][-1])+'_'+str(results['label'])
         for i, frame_idx in enumerate(results['frame_inds']):
             # Avoid loading duplicated frames
             if frame_idx in cache:
