@@ -23,12 +23,12 @@ model = dict(
 
 # dataset settings
 dataset_type = 'FatigueCleanDataset'
-data_root = '/default_group/fatigue_clips'
-data_root_val = '/default_group/fatigue_clips'
+data_root = '/zhourui/workspace/pro/fatigue/data/rawframes/new_clean/fatigue_clips'
+data_root_val = 'zhourui/workspace/pro/fatigue/data/rawframes/new_clean/fatigue_clips'
 facerect_data_prefix = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_info_from_yolov5'
-ann_file_train = '/default_group/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
-ann_file_val = '/default_group/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
-ann_file_test = '/default_group/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
+ann_file_train = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
+ann_file_val = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
+ann_file_test = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
 
 img_norm_cfg = dict(
     mean=[127.5, 127.5, 127.5], std=[127.5, 127.5, 127.5], to_bgr=False)
