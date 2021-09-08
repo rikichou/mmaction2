@@ -1,13 +1,14 @@
 _base_ = ['../../_base_/default_runtime.py']
 
 # model settings
+clip_len = 48
 model = dict(
     type='Recognizer3D',
     backbone=dict(
         type='TimeSformer',
         pretrained=  # noqa: E251
         'https://download.openmmlab.com/mmaction/recognition/timesformer/vit_base_patch16_224.pth',  # noqa: E501
-        num_frames=8,
+        num_frames=clip_len,
         img_size=224,
         patch_size=16,
         embed_dims=768,
@@ -33,7 +34,6 @@ ann_file_test = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824
 img_norm_cfg = dict(
     mean=[127.5, 127.5, 127.5], std=[127.5, 127.5, 127.5], to_bgr=False)
 
-clip_len = 48
 train_pipeline = [
     dict(type='SampleFrames', clip_len=clip_len, frame_interval=1, num_clips=1, out_of_bound_opt='repeat_last'),
     dict(type='FatigueRawFrameDecode'),
