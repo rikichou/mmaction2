@@ -1,7 +1,7 @@
 _base_ = ['../../_base_/default_runtime.py']
 
 # model settings
-clip_len = 48
+clip_len = 32
 model = dict(
     type='Recognizer3D',
     backbone=dict(
@@ -78,7 +78,7 @@ test_pipeline = [
     dict(type='ToTensor', keys=['imgs', 'label'])
 ]
 data = dict(
-    videos_per_gpu=8,
+    videos_per_gpu=2,
     workers_per_gpu=4,
     pin_memory=False,
     train=dict(
