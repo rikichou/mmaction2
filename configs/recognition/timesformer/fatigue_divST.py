@@ -117,7 +117,7 @@ evaluation = dict(
 # optimizer
 optimizer = dict(
     type='SGD',
-    lr=0.005,
+    lr=0.001,
     momentum=0.9,
     paramwise_cfg=dict(
         custom_keys={
