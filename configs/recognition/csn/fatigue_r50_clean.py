@@ -23,6 +23,9 @@ facerect_data_prefix = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_info_f
 ann_file_train = '/default_group/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
 ann_file_val = '/default_group/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
 ann_file_test = '/default_group/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
+test_save_results_path = 'work_dirs/fatigue_r50_clean/valid_results_testone.npy'
+test_save_label_path = 'work_dirs/fatigue_r50_clean/valid_label_testone.npy'
+
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_bgr=False)
 clip_len = 48
@@ -101,6 +104,8 @@ data = dict(
         data_phase='valid',
         test_mode=True,
         test_all=False,
+        test_save_label_path=test_save_label_path,
+        test_save_results_path=test_save_results_path,
         pipeline=test_pipeline,
         min_frames_before_fatigue=clip_len))
 evaluation = dict(
