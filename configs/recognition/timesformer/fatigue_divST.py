@@ -110,8 +110,8 @@ data = dict(
         data_phase='valid',
         test_mode=True,
         test_all=False,
-        test_save_label_path=,
-        test_save_results_path=,
+        test_save_label_path=test_save_label_path,
+        test_save_results_path=test_save_results_path,
         pipeline=test_pipeline,
         min_frames_before_fatigue=clip_len))
 
