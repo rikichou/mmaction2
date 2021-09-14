@@ -30,8 +30,8 @@ facerect_data_prefix = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_info_f
 ann_file_train = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
 ann_file_val = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
 ann_file_test = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
-test_save_results_path = 'work_dirs/fatigue_timesformer_divST/valid_results_testone.npy'
-test_save_label_path = 'work_dirs/fatigue_timesformer_divST/valid_label_testone.npy'
+test_save_results_path = 'work_dirs/fatigue_timesformer_divST_48/valid_results_testone.npy'
+test_save_label_path = 'work_dirs/fatigue_timesformer_divST_48/valid_label_testone.npy'
 
 img_norm_cfg = dict(
     mean=[127.5, 127.5, 127.5], std=[127.5, 127.5, 127.5], to_bgr=False)
