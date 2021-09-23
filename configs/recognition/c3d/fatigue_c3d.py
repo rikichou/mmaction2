@@ -34,7 +34,8 @@ test_save_results_path = 'work_dirs/fatigue_r50_clean/valid_results_testone.npy'
 test_save_label_path = 'work_dirs/fatigue_r50_clean/valid_label_testone.npy'
 
 img_norm_cfg = dict(mean=[104, 117, 128], std=[1, 1, 1], to_bgr=False)
-clip_len = 48
+# support clip len 16 only!!!
+clip_len = 16
 train_pipeline = [
     dict(type='SampleFrames', clip_len=clip_len, frame_interval=1, num_clips=1, out_of_bound_opt='repeat_last'),
     dict(type='FatigueRawFrameDecode'),
