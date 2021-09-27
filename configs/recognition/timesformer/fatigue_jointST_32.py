@@ -9,7 +9,7 @@ model = dict(
         pretrained=  # noqa: E251
         'https://download.openmmlab.com/mmaction/recognition/timesformer/vit_base_patch16_224.pth',  # noqa: E501
         num_frames=clip_len,
-        img_size=224,
+        img_size=112,
         patch_size=16,
         embed_dims=768,
         in_channels=3,
