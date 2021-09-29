@@ -175,7 +175,7 @@ class BaseRecognizer(nn.Module, metaclass=ABCMeta):
             raise KeyError('"average_clips" must defined in test_cfg\'s keys')
 
         average_clips = self.test_cfg['average_clips']
-        if average_clips not in ['score', 'prob', None]:
+        if average_clips not in ['score', 'prob', 'org_prob', None]:
             raise ValueError(f'{average_clips} is not supported. '
                              f'Currently supported ones are '
                              f'["score", "prob", None]')
@@ -190,7 +190,9 @@ class BaseRecognizer(nn.Module, metaclass=ABCMeta):
             cls_score = F.softmax(cls_score, dim=2).mean(dim=1)
         elif average_clips == 'score':
             cls_score = cls_score.mean(dim=1)
-
+        elif average_clips == 'org_prob':
+            cls_score = F.softmax(cls_score, dim=2)
+            cls_score.view(num_segs, -1)
         return cls_score
 
     @abstractmethod
