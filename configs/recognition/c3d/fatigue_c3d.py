@@ -84,7 +84,7 @@ test_pipeline = [
 
 data = dict(
     videos_per_gpu=20,
-    workers_per_gpu=8,
+    workers_per_gpu=4,
     pin_memory=False,
     train=dict(
         type=dataset_type,
@@ -128,7 +128,7 @@ optimizer_config = dict(grad_clip=dict(max_norm=40, norm_type=2))
 # learning policy
 lr_config = dict(policy='step', step=[20, 40])
 total_epochs = 45
-checkpoint_config = dict(interval=5)
+checkpoint_config = dict(interval=1)
 
 log_config = dict(
     interval=20,
