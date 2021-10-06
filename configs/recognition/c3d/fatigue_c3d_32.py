@@ -18,7 +18,7 @@ model = dict(
         type='I3DHead',
         num_classes=2,
         in_channels=4096,
-        spatial_type='avg',
+        spatial_type=None,
         dropout_ratio=0.5,
         init_std=0.01),
     # model training and testing settings
