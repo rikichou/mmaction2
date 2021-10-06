@@ -33,8 +33,8 @@ facerect_data_prefix = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_info_f
 ann_file_train = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
 ann_file_val = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
 ann_file_test = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
-test_save_results_path = 'work_dirs/fatigue_r50_clean/valid_results_testone.npy'
-test_save_label_path = 'work_dirs/fatigue_r50_clean/valid_label_testone.npy'
+test_save_results_path = 'work_dirs/fatigue_c3d/valid_results_testone.npy'
+test_save_label_path = 'work_dirs/fatigue_c3d/valid_label_testone.npy'
 
 img_norm_cfg = dict(mean=[104, 117, 128], std=[1, 1, 1], to_bgr=False)
 # support clip len 16 only!!!
