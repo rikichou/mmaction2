@@ -188,7 +188,7 @@ class C3D32(nn.Module):
             act_cfg=self.act_cfg)
 
         self.conv1a = ConvModule(3, 64, **c3d_conv_param)
-        self.pool1 = nn.MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2))
+        self.pool1 = nn.MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2))
 
         self.conv2a = ConvModule(64, 128, **c3d_conv_param)
         self.pool2 = nn.MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2))
@@ -202,7 +202,7 @@ class C3D32(nn.Module):
         self.pool4 = nn.MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2))
 
         self.conv5a = ConvModule(512, 512, **c3d_conv_param)
-        self.conv5b = ConvModule(512, 512, **c3d_conv_param)
+        self.conv5b = ConvModule(512, 256, **c3d_conv_param)
         self.pool5 = nn.MaxPool3d(
             kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=(0, 1, 1))
 
