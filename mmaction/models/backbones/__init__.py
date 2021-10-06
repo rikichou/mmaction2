@@ -1,4 +1,4 @@
-from .c3d import C3D
+from .c3d import C3D, C3D32
 from .mobilenet_v2 import MobileNetV2
 from .mobilenet_v2_tsm import MobileNetV2TSM
 from .resnet import ResNet
@@ -16,7 +16,7 @@ from .x3d import X3D
 from .swin_transformer import SwinTransformer3D
 
 __all__ = [
-    'C3D', 'ResNet', 'ResNet3d', 'ResNetTSM', 'ResNet2Plus1d',
+    'C3D', 'C3D32', 'ResNet', 'ResNet3d', 'ResNetTSM', 'ResNet2Plus1d',
     'ResNet3dSlowFast', 'ResNet3dSlowOnly', 'ResNet3dCSN', 'ResNetTIN', 'X3D',
     'ResNetAudio', 'ResNet3dLayer', 'MobileNetV2TSM', 'MobileNetV2', 'TANet',
     'TimeSformer', 'SwinTransformer3D'

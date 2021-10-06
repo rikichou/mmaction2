@@ -2,7 +2,7 @@
 model = dict(
     type='Recognizer3D',
     backbone=dict(
-        type='C3D',
+        type='C3D32',
         # pretrained=  # noqa: E251
         # 'https://download.openmmlab.com/mmaction/recognition/c3d/c3d_sports1m_pretrain_20201016-dcc47ddc.pth',  # noqa: E501
         pretrained=  # noqa: E251
