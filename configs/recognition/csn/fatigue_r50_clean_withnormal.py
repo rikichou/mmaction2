@@ -17,6 +17,7 @@ model = dict(
 )
 # dataset settings
 dataset_type = 'FatigueNormalDataset'
+test_dataset_type = 'FatigueCleanDataset'
 data_root = '/zhourui/workspace/pro/fatigue/data/rawframes/new_clean/fatigue_clips'
 data_root_val = '/zhourui/workspace/pro/fatigue/data/rawframes/new_clean/fatigue_clips'
 facerect_data_prefix = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_info_from_yolov5'
@@ -87,7 +88,7 @@ data = dict(
         pipeline=train_pipeline,
         min_frames_before_fatigue=clip_len),
     val=dict(
-        type=dataset_type,
+        type=test_dataset_type,
         ann_file=ann_file_val,
         video_data_prefix=data_root_val,
         facerect_data_prefix=facerect_data_prefix,
@@ -97,7 +98,7 @@ data = dict(
         pipeline=val_pipeline,
         min_frames_before_fatigue=clip_len),
     test=dict(
-        type=dataset_type,
+        type=test_dataset_type,
         ann_file=ann_file_test,
         video_data_prefix=data_root_val,
         facerect_data_prefix=facerect_data_prefix,
