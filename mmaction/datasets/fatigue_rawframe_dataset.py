@@ -440,7 +440,7 @@ class FatigueCleanDataset(BaseDataset):
     def load_annotations(self):
         video_infos = []
         flatten_video_infos = []
-        label_map = {'fatigue_close': 1, 'fatigue_look_down': 0}
+        label_map = {'fatigue_close': 1, 'fatigue_look_down': 0, 'fatigue_squint':0}
         print("Start to Parsing label file ", self.ann_file)
 
         # statistics info
@@ -728,7 +728,7 @@ class FatigueNormalDataset(BaseDataset):
     def load_annotations(self):
         video_infos = []
         flatten_video_infos = []
-        label_map = {'fatigue_close': 1, 'fatigue_look_down': 0}
+        label_map = {'fatigue_close': 1, 'fatigue_look_down': 0, 'fatigue_squint':0}
         print("Start to Parsing label file ", self.ann_file)
 
         # statistics info
@@ -1033,7 +1033,7 @@ class FatigueMoveDataset(BaseDataset):
     def load_annotations(self):
         video_infos = []
         flatten_video_infos = []
-        label_map = {'fatigue_close': 1, 'fatigue_look_down': 0}
+        label_map = {'fatigue_close': 1, 'fatigue_look_down': 0, 'fatigue_squint':0}
         print("Start to Parsing label file ", self.ann_file)
 
         # statistics info
