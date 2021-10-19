@@ -23,8 +23,8 @@ facerect_data_prefix = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_info_f
 ann_file_train = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
 ann_file_val = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
 ann_file_test = '/zhourui/workspace/pro/fatigue/data/clean/fatigue_anns/20210824_fatigue_pl_less_than_50_fatigue_full_info_all_path.json'
-test_save_results_path = 'work_dirs/fatigue_r50_clean/valid_results_testone.npy'
-test_save_label_path = 'work_dirs/fatigue_r50_clean/valid_label_testone.npy'
+test_save_results_path = 'work_dirs/fatigue_r50_clean_96_int2/valid_results_testone.npy'
+test_save_label_path = 'work_dirs/fatigue_r50_clean_96_int2/valid_label_testone.npy'
 
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_bgr=False)
@@ -130,5 +130,5 @@ lr_config = dict(
     warmup_iters=16)
 total_epochs = 58
 
-work_dir = './work_dirs/fatigue_r50_clean'  # noqa: E501
+work_dir = './work_dirs/fatigue_r50_clean_96_int2'  # noqa: E501
 find_unused_parameters = True
