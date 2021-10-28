@@ -9,7 +9,7 @@ model = dict(
         norm_eval=True,
         bn_frozen=True,
         pretrained=  # noqa: E251
-        'pretrained/ircsn_from_scratch_r50_ig65m_20210617-ce545a37.pth'  # noqa: E501
+        '/zhourui/workspace/pro/source/mmaction2/work_dirs/fatigue_r50_clean_with_squint/epoch_58.pth'  # noqa: E501
     ),
     cls_head=dict(
         num_classes=2
