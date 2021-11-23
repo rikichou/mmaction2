@@ -38,7 +38,7 @@ model = dict(
     test_cfg=dict(average_clips='prob'))
 
 # dataset settings
-dataset_type = 'FatigueCleanDatasetWithoutDahaqian'
+dataset_type = 'FatigueCleanDataset'
 data_root = '/zhourui/workspace/pro/fatigue/data/rawframes/new_clean'
 data_root_val = '/zhourui/workspace/pro/fatigue/data/rawframes/new_clean'
 facerect_data_prefix = '/zhourui/workspace/pro/fatigue/data/anns/new_clean'
