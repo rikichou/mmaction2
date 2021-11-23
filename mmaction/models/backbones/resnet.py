@@ -711,7 +711,7 @@ class ResNetTiny(nn.Module):
 
         # self.feat_dim = self.block.expansion * 64 * 2**(
         #     len(self.stage_blocks) - 1)
-        self.feat_dim = res_layer[-1].out_channels
+        self.feat_dim = self.max_channels
 
     def _make_stem_layer(self, in_channels, base_channels, stem_stride):
         self.conv1 = build_conv_layer(
