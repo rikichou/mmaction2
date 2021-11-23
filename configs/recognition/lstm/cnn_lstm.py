@@ -134,13 +134,13 @@ evaluation = dict(
 
 # optimizer
 optimizer = dict(
-    type='SGD', lr=0.000125, momentum=0.9,
+    type='SGD', lr=0.001, momentum=0.9,
     weight_decay=0.0001)  # this lr is used for 8 gpus
 optimizer_config = dict(grad_clip=dict(max_norm=40, norm_type=2))
 # learning policy
 lr_config = dict(
     policy='step',
-    step=[32, 48],
+    step=[10, 25, 48],
     warmup='linear',
     warmup_ratio=0.1,
     warmup_by_epoch=True,
