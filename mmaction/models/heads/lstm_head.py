@@ -46,6 +46,7 @@ class LSTMHead(BaseHead):
         self.spatial_type = spatial_type
         self.dropout_ratio = dropout_ratio
         self.num_segments = num_segments
+        self.hidden_size = hidden_size
         self.init_std = init_std
         self.temporal_pool = temporal_pool
 
@@ -53,7 +54,7 @@ class LSTMHead(BaseHead):
             self.dropout = nn.Dropout(p=self.dropout_ratio)
         else:
             self.dropout = None
-        self.rnn = nn.LSTM(input_size=in_channels, hidden_size=hidden_size, num_layers=layers_num, batch_first=True)
+        self.rnn = nn.LSTM(input_size=in_channels, hidden_size=self.hidden_size, num_layers=layers_num, batch_first=True)
         self.fc_cls = nn.Linear(self.hidden_size, self.num_classes)
 
         if self.spatial_type == 'avg':
