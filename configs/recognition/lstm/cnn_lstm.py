@@ -6,6 +6,12 @@ base_channels = 16
 max_channels = 128
 stem_stride = 2
 
+clip_len = 32
+
+hidden_size = 64
+layers_num = 1
+num_segments = clip_len
+
 model = dict(
     type='Recognizer2D',
     backbone=dict(
@@ -21,6 +27,9 @@ model = dict(
         type='LSTMHead',
         num_classes=2,
         in_channels=128,
+        num_segments=num_segments,
+        hidden_size=hidden_size,
+        layers_num=layers_num,
         spatial_type='avg',
         dropout_ratio=0.5,
         init_std=0.001),
@@ -41,7 +50,6 @@ test_save_label_path = 'work_dirs/cnn_lstm/valid_label_testone.npy'
 
 img_norm_cfg = dict(
     mean=[127.5], std=[127.5], to_bgr=False)
-clip_len = 32
 train_pipeline = [
     dict(type='SampleFrames', clip_len=clip_len, frame_interval=1, num_clips=1, out_of_bound_opt='repeat_last'),
     dict(type='FatigueRawFrameDecode'),
