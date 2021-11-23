@@ -722,9 +722,9 @@ class ResNetTiny(nn.Module):
             stride=stem_stride,
             padding=1,
             bias=False)
-        self.norm1_name, norm1 = build_norm_layer(
+        self.norm1_name, self.norm1 = build_norm_layer(
             self.norm_cfg, base_channels, postfix=1)
-        self.add_module(self.norm1_name, norm1)
+        self.add_module(self.norm1_name, self.norm1)
         self.relu = nn.ReLU(inplace=True)
 
     # def _make_stem_layer(self):
