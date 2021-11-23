@@ -655,6 +655,7 @@ class ResNetTiny(nn.Module):
             raise KeyError(f'invalid depth {depth} for resnet')
         self.depth = depth
         self.in_channels = in_channels
+        self.max_channels = max_channels
         self.pretrained = pretrained
         self.torchvision_pretrain = torchvision_pretrain
         self.num_stages = num_stages
@@ -700,7 +701,7 @@ class ResNetTiny(nn.Module):
 
             _in_channels = _out_channels
             if _out_channels*2 > self.max_channels:
-                _out_channels = max_channels
+                _out_channels = self.max_channels
             else:
                 _out_channels *= 2
 
