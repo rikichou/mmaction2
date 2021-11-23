@@ -1417,7 +1417,7 @@ class FatigueRawFrameDecodeGray:
         # loading face
         def get_input_face(image, rect):
             sx, sy, ex, ey = rect
-            h, w, c = image.shape
+            h, w = image.shape
             faceh = ey - sy
             facew = ex - sx
 
@@ -1435,7 +1435,7 @@ class FatigueRawFrameDecodeGray:
             ex = int(min(w - 1, ex))
             ey = int(min(h - 1, ey))
 
-            return image[sy:ey, sx:ex, :]
+            return image[sy:ey, sx:ex]
 
         cache = {}
         facerect_infos = results['facerect_infos']

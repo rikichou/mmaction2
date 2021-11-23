@@ -52,7 +52,7 @@ img_norm_cfg = dict(
     mean=[127.5], std=[127.5], to_bgr=False)
 train_pipeline = [
     dict(type='SampleFrames', clip_len=clip_len, frame_interval=1, num_clips=1, out_of_bound_opt='repeat_last'),
-    dict(type='FatigueRawFrameDecode'),
+    dict(type='FatigueRawFrameDecodeGray'),
     dict(type='Resize', scale=(-1, 128)),
     dict(type='RandomResizedCrop'),
     dict(type='Resize', scale=(112, 112), keep_ratio=False),
@@ -70,7 +70,7 @@ val_pipeline = [
         num_clips=1,
         test_mode=True,
         out_of_bound_opt='repeat_last'),
-    dict(type='FatigueRawFrameDecode'),
+    dict(type='FatigueRawFrameDecodeGray'),
     dict(type='Resize', scale=(-1, 128)),
     dict(type='CenterCrop', crop_size=112),
     dict(type='Normalize', **img_norm_cfg),
@@ -86,7 +86,7 @@ test_pipeline = [
         num_clips=1,
         test_mode=True,
         out_of_bound_opt='repeat_last'),
-    dict(type='FatigueRawFrameDecode'),
+    dict(type='FatigueRawFrameDecodeGray'),
     dict(type='Resize', scale=(-1, 128)),
     dict(type='ThreeCrop', crop_size=128),
     dict(type='Normalize', **img_norm_cfg),
@@ -96,7 +96,7 @@ test_pipeline = [
 ]
 data = dict(
     videos_per_gpu=16,
-    workers_per_gpu=4,
+    workers_per_gpu=6,
     pin_memory=False,
     train=dict(
         type=dataset_type,
