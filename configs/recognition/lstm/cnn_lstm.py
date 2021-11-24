@@ -1,5 +1,12 @@
 _base_ = ['../../_base_/default_runtime.py']
 
+log_config = dict(
+    interval=1,
+    hooks=[
+        dict(type='TextLoggerHook'),
+        # dict(type='TensorboardLoggerHook'),
+    ])
+
 # model settings
 in_channels = 1
 base_channels = 16
