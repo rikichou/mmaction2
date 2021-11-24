@@ -34,7 +34,6 @@ model = dict(
         type='TSNHead',
         num_classes=2,
         in_channels=max_channels,
-        num_segments=num_segments,
         spatial_type='avg',
         dropout_ratio=0.5,
         init_std=0.001),
