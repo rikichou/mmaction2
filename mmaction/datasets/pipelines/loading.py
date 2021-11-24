@@ -1442,7 +1442,6 @@ class FatigueRawFrameDecodeGray:
 
         # debug image
         # out_dir_name = str(results['frame_inds'][-1])+'_'+str(results['label'])
-        debug_name_list = []
         for i, frame_idx in enumerate(results['frame_inds']):
             # Avoid loading duplicated frames
             if frame_idx in cache:
@@ -1462,7 +1461,6 @@ class FatigueRawFrameDecodeGray:
                 # Get frame with channel order RGB directly.
                 cur_frame = mmcv.imfrombytes(img_bytes, flag='grayscale')
                 cur_face_frame = get_input_face(cur_frame, facerect_infos[filename_tmpl.format(frame_idx)])
-                debug_name_list.append(filename_tmpl.format(frame_idx))
                 imgs.append(cur_face_frame)
 
                 # debug image
@@ -1486,7 +1484,7 @@ class FatigueRawFrameDecodeGray:
                 imgs.extend([x_frame, y_frame])
             else:
                 raise NotImplementedError
-        print("debug_name_list ", debug_name_list)
+
         results['imgs'] = imgs
         results['original_shape'] = imgs[0].shape[:2]
         results['img_shape'] = imgs[0].shape[:2]
