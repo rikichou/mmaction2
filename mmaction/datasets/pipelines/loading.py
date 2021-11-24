@@ -249,7 +249,6 @@ class SampleFrames:
         start_index = results['start_index']
         frame_inds = np.concatenate(frame_inds) + start_index
         results['frame_inds'] = frame_inds.astype(np.int)
-        print("frame_inds ", results['frame_inds'])
         results['clip_len'] = self.clip_len
         results['frame_interval'] = self.frame_interval
         results['num_clips'] = self.num_clips
@@ -1304,7 +1303,7 @@ class FatigueRawFrameDecode:
         facerect_infos = results['facerect_infos']
 
         # debug image
-        out_dir_name = str(results['frame_inds'][-1])+'_'+str(results['label'])
+        # out_dir_name = str(results['frame_inds'][-1])+'_'+str(results['label'])
         for i, frame_idx in enumerate(results['frame_inds']):
             # Avoid loading duplicated frames
             if frame_idx in cache:
@@ -1323,18 +1322,17 @@ class FatigueRawFrameDecode:
                 img_bytes = self.file_client.get(filepath)
                 # Get frame with channel order RGB directly.
                 cur_frame = mmcv.imfrombytes(img_bytes, channel_order='rgb')
-                print("filename_tmpl.format(frame_idx) : ", filename_tmpl.format(frame_idx))
                 cur_face_frame = get_input_face(cur_frame, facerect_infos[filename_tmpl.format(frame_idx)])
                 imgs.append(cur_face_frame)
 
                 # debug image
-                debug_root_dir = '/zhourui/workspace/pro/tmp/clean_debug'
-                if not os.path.exists(debug_root_dir):
-                    os.makedirs(debug_root_dir)
-                idx_out_dir = os.path.join(debug_root_dir, '/'.join(directory.split('/')[-3:]), out_dir_name)
-                if not os.path.exists(idx_out_dir):
-                    os.makedirs(idx_out_dir)
-                cv2.imwrite(os.path.join(idx_out_dir, filename_tmpl.format(frame_idx)), cur_face_frame)
+                # debug_root_dir = '/zhourui/workspace/pro/tmp/clean_debug'
+                # if not os.path.exists(debug_root_dir):
+                #     os.makedirs(debug_root_dir)
+                # idx_out_dir = os.path.join(debug_root_dir, '/'.join(directory.split('/')[-3:]), out_dir_name)
+                # if not os.path.exists(idx_out_dir):
+                #     os.makedirs(idx_out_dir)
+                # cv2.imwrite(os.path.join(idx_out_dir, filename_tmpl.format(frame_idx)), cur_face_frame)
 
             elif modality == 'Flow':
                 x_filepath = osp.join(directory,
@@ -1443,7 +1441,8 @@ class FatigueRawFrameDecodeGray:
         facerect_infos = results['facerect_infos']
 
         # debug image
-        out_dir_name = str(results['frame_inds'][-1])+'_'+str(results['label'])
+        # out_dir_name = str(results['frame_inds'][-1])+'_'+str(results['label'])
+        debug_name_list = []
         for i, frame_idx in enumerate(results['frame_inds']):
             # Avoid loading duplicated frames
             if frame_idx in cache:
@@ -1462,18 +1461,18 @@ class FatigueRawFrameDecodeGray:
                 img_bytes = self.file_client.get(filepath)
                 # Get frame with channel order RGB directly.
                 cur_frame = mmcv.imfrombytes(img_bytes, flag='grayscale')
-                print("filename_tmpl.format(frame_idx) ", filename_tmpl.format(frame_idx))
                 cur_face_frame = get_input_face(cur_frame, facerect_infos[filename_tmpl.format(frame_idx)])
+                debug_name_list.append(filename_tmpl.format(frame_idx))
                 imgs.append(cur_face_frame)
 
                 # debug image
-                debug_root_dir = '/zhourui/workspace/pro/tmp/clean_debug'
-                if not os.path.exists(debug_root_dir):
-                    os.makedirs(debug_root_dir)
-                idx_out_dir = os.path.join(debug_root_dir, '/'.join(directory.split('/')[-3:]), out_dir_name)
-                if not os.path.exists(idx_out_dir):
-                    os.makedirs(idx_out_dir)
-                cv2.imwrite(os.path.join(idx_out_dir, filename_tmpl.format(frame_idx)), cur_face_frame)
+                # debug_root_dir = '/zhourui/workspace/pro/tmp/clean_debug'
+                # if not os.path.exists(debug_root_dir):
+                #     os.makedirs(debug_root_dir)
+                # idx_out_dir = os.path.join(debug_root_dir, '/'.join(directory.split('/')[-3:]), out_dir_name)
+                # if not os.path.exists(idx_out_dir):
+                #     os.makedirs(idx_out_dir)
+                # cv2.imwrite(os.path.join(idx_out_dir, filename_tmpl.format(frame_idx)), cur_face_frame)
 
             elif modality == 'Flow':
                 x_filepath = osp.join(directory,
@@ -1487,7 +1486,7 @@ class FatigueRawFrameDecodeGray:
                 imgs.extend([x_frame, y_frame])
             else:
                 raise NotImplementedError
-
+        print("debug_name_list ", debug_name_list)
         results['imgs'] = imgs
         results['original_shape'] = imgs[0].shape[:2]
         results['img_shape'] = imgs[0].shape[:2]
