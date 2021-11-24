@@ -58,7 +58,7 @@ test_save_label_path = 'work_dirs/cnn_lstm_bigger/valid_label_testone.npy'
 img_norm_cfg = dict(
     mean=[127.5], std=[127.5], to_bgr=False)
 train_pipeline = [
-    dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=clip_len, out_of_bound_opt='repeat_last'),
+    dict(type='SampleFrames', clip_len=clip_len, frame_interval=1, num_clips=1, out_of_bound_opt='repeat_last'),
     dict(type='FatigueRawFrameDecodeGray'),
     dict(type='Resize', scale=(-1, 128)),
     dict(type='RandomResizedCrop'),
