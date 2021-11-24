@@ -107,6 +107,5 @@ class TSMHead(BaseHead):
                                        cls_score.size()[1:])
         # [N, 1, num_classes]
         cls_score = self.consensus(cls_score)
-        print(cls_score)
         # [N, num_classes]
         return cls_score.squeeze(1)
