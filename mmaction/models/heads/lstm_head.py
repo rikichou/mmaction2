@@ -81,9 +81,11 @@ class LSTMHead(BaseHead):
             torch.Tensor: The classification scores for input samples.
         """
         # [N * num_segs, in_channels, 7, 7]
+        print("1 :", x.size())
         if self.avg_pool is not None:
             x = self.avg_pool(x)
         # [N * num_segs, in_channels, 1, 1]
+        print("2 :", x.size())
         x = torch.flatten(x, 1)
         # [N * num_segs, in_channels]
         if self.dropout is not None:
@@ -91,15 +93,18 @@ class LSTMHead(BaseHead):
         # [N * num_segs, in_channels]
         x = x.view((-1, self.num_segments) +
                        x.size()[1:])
+        print("3 :", x.size())
         # [N, num_segs, in_channels]
         x, (hn, cn) = self.rnn(x)
 
         # [N, num_segs, hidden_size]
+        print("4 :", x.size())
         x = x[:,-1,:]
+        print("5 :", x.size())
 
         # [N, hidden_size]
         cls_score = self.fc_cls(x)
-
+        print("6 :", x.size())
         # [N, num_classes]
         return cls_score
 
