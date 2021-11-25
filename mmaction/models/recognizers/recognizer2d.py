@@ -7,6 +7,7 @@ from .base import BaseRecognizer
 import cv2
 import time
 import os
+import numpy as np
 
 @RECOGNIZERS.register_module()
 class Recognizer2D(BaseRecognizer):
@@ -32,6 +33,8 @@ class Recognizer2D(BaseRecognizer):
         for idx,img in enumerate(imgs_cpu):
             # [1, 112, 112]
             img = img.reshape((112,112))
+            img = (img*255).astype(np.uint8)
+
             cv2.imwrite(os.path.join(out_dir, '{}.jpg'.format(idx)), img)
 
         losses = dict()
