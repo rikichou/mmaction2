@@ -23,12 +23,12 @@ class Recognizer2D(BaseRecognizer):
         imgs = imgs.reshape((-1, ) + imgs.shape[2:])
         num_segs = imgs.shape[0] // batches
 
+        # Debug code to anaysis data aug
         debug_root_dir = '/zhourui/workspace/pro/source/mmaction2/tmp'
         debug_dir = time.strftime('%Y-%m-%d_%H_%M_%S')
         out_dir = os.path.join(debug_root_dir, debug_dir)
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
-
         imgs_cpu = imgs.cpu().numpy()
         for idx,img in enumerate(imgs_cpu):
             # [1, 112, 112]

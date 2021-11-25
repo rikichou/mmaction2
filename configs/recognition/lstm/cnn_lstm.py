@@ -60,8 +60,6 @@ img_norm_cfg = dict(
 train_pipeline = [
     dict(type='SampleFrames', clip_len=1, frame_interval=1, num_clips=clip_len, out_of_bound_opt='repeat_last'),
     dict(type='FatigueRawFrameDecodeGray'),
-    dict(type='Resize', scale=(-1, 128)),
-    dict(type='RandomResizedCrop'),
     dict(type='Resize', scale=(112, 112), keep_ratio=False),
     dict(type='Flip', flip_ratio=0.5),
     dict(type='NormalizeGray', **img_norm_cfg),
