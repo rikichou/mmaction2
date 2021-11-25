@@ -33,7 +33,7 @@ class Recognizer2D(BaseRecognizer):
         for idx,img in enumerate(imgs_cpu):
             # [1, 112, 112]
             img = img.reshape((112,112))
-            img = (img*255).astype(np.uint8)
+            img = (img*127.5+127.5).astype(np.uint8)
 
             cv2.imwrite(os.path.join(out_dir, '{}.jpg'.format(idx)), img)
 
