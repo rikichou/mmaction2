@@ -9,13 +9,13 @@ log_config = dict(
 
 # model settings
 in_channels = 1
-base_channels = 16
-max_channels = 128
+base_channels = 32
+max_channels = 256
 stem_stride = 2
 
-clip_len = 32
+clip_len = 16
 
-hidden_size = 64
+hidden_size = 128
 layers_num = 1
 num_segments = clip_len
 
@@ -31,9 +31,9 @@ model = dict(
         max_channels = max_channels,
         stem_stride = stem_stride),
     cls_head=dict(
-        type='LSTMHead',
+        type='LSTMHeadNew',
         num_classes=2,
-        in_channels=128,
+        in_channels=max_channels,
         num_segments=num_segments,
         hidden_size=hidden_size,
         layers_num=layers_num,
