@@ -4,6 +4,9 @@ from torch import nn
 from ..builder import RECOGNIZERS
 from .base import BaseRecognizer
 
+import cv2
+import time
+import os
 
 @RECOGNIZERS.register_module()
 class Recognizer2D(BaseRecognizer):
@@ -16,10 +19,20 @@ class Recognizer2D(BaseRecognizer):
         batches = imgs.shape[0]
 
         # TODO important, whats the output, whats the shape。 看看与3D的识别有何不同，是否问题出在这里？？？？？？
-        print(imgs.shape)
-        print(type(imgs))
         imgs = imgs.reshape((-1, ) + imgs.shape[2:])
         num_segs = imgs.shape[0] // batches
+
+        debug_root_dir = '/zhourui/workspace/pro/source/mmaction2/tmp'
+        debug_dir = time.strftime('%Y-%m-%d_%H_%M_%S')
+        out_dir = os.path.join(debug_root_dir, debug_dir)
+        if not os.path.exists(out_dir):
+            os.makedirs(out_dir)
+
+        imgs_cpu = imgs.cpu().numpy()
+        for idx,img in enumerate(imgs_cpu):
+            # [1, 112, 112]
+            img = img.reshape((112,112))
+            cv2.imwrite(os.path.join(out_dir, '{}.jpg'.format(idx)), img)
 
         losses = dict()
 
