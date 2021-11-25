@@ -14,6 +14,10 @@ class Recognizer2D(BaseRecognizer):
 
         assert self.with_cls_head
         batches = imgs.shape[0]
+
+        # TODO important, whats the output, whats the shape。 看看与3D的识别有何不同，是否问题出在这里？？？？？？
+        print(imgs.shape)
+        print(type(imgs))
         imgs = imgs.reshape((-1, ) + imgs.shape[2:])
         num_segs = imgs.shape[0] // batches
 
